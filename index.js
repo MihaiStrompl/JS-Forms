@@ -2,6 +2,8 @@ const modal = document.getElementById('modal')
 const modalCloseBtn = document.getElementById('modal-close-btn')
 const consentForm = document.getElementById('consent-form')
 const modalText = document.getElementById('modal-text')
+const declineBtn = document.getElementById('decline-btn')
+const modalChoiceBtns = document.getElementById('modal-choice-btns')
 
 setTimeout(function(){
     modal.style.display = 'inline'
@@ -11,21 +13,26 @@ modalCloseBtn.addEventListener('click', function(){
     modal.style.display = 'none'
 })
 
+declineBtn.addEventListener('mouseenter', function(){
+    modalChoiceBtns.classList.toggle('reverse')
+})
+
+/*   
+Challenge: 
+1. Take control of the div holding the buttons.
+2. In index.css, set up a selector for a new class
+   that uses flex-direction to reverse the order 
+   of its child elements.
+3. Toggle that class on the div holding the buttons 
+   when a user's cursor hovers over the decline button.
+*/ 
+
+
 consentForm.addEventListener('submit', function(e){
     e.preventDefault()
     
     const consentFormData = new FormData(consentForm)
     const fullName = consentFormData.get('fullName')
-/*   
-Challenge: 
-1. Create a const to store the user's name and
-   use a FormData method to extract the 
-   submitted name from the FormData object.
-2. Insert the user's name into the HTML string
-   that contains the final message we show our
-   users.
-*/ 
-    
     
     modalText.innerHTML = `
     <div class="modal-inner-loading">
@@ -47,6 +54,7 @@ Challenge:
             <img src="images/pirate.gif">
         </div>
     `
+    modalCloseBtn.disabled = false
     }, 3000)
   
 }) 
